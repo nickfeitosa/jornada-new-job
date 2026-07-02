@@ -1,41 +1,83 @@
-from database.base import SessionLocal
 from database.models import SelectionProcess
 
+from repositories.selection_process_repository import (
+    create_selection_process,
+    list_selection_processes as repository_list_selection_processes,
+    get_selection_process_by_id,
+    update_selection_process,
+    delete_selection_process,
+)
 
-def create_selection_process(
+
+def create_process(
     company: str,
     title: str,
-    status: str
+    current_status: str
 ):
-    session = SessionLocal()
+    """
+    Cria um novo processo seletivo.
+    """
 
-    try:
+    if not company.strip():
+        raise ValueError("Empresa é obrigatória.")
 
-        process = SelectionProcess(
-            company=company,
-            title=title,
-            current_status=status
-        )
+    if not title.strip():
+        raise ValueError("Cargo é obrigatório.")
 
-        session.add(process)
+    process = SelectionProcess(
+        company=company.strip(),
+        title=title.strip(),
+        current_status=current_status
+    )
 
-        session.commit()
-
-        return process
-
-    finally:
-        session.close()
+    return create_selection_process(process)
 
 
 def list_selection_processes():
+    """
+    Lista todos os processos cadastrados.
+    """
 
-    session = SessionLocal()
+    return repository_list_selection_processes()
 
-    try:
 
-        return session.query(
-            SelectionProcess
-        ).all()
+def get_process(process_id: int):
+    """
+    Busca um processo pelo ID.
+    """
 
-    finally:
-        session.close()
+    return get_selection_process_by_id(process_id)
+
+
+def update_process(
+    process_id: int,
+    company: str,
+    title: str,
+    current_status: str
+):
+    """
+    Atualiza um processo existente.
+    """
+
+    if not company.strip():
+        raise ValueError("Empresa é obrigatória.")
+
+    if not title.strip():
+        raise ValueError("Cargo é obrigatório.")
+
+    process = SelectionProcess(
+        id=process_id,
+        company=company.strip(),
+        title=title.strip(),
+        current_status=current_status
+    )
+
+    return update_selection_process(process)
+
+
+def delete_process(process_id: int):
+    """
+    Exclui um processo.
+    """
+
+    return delete_selection_process(process_id)
