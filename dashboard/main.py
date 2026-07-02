@@ -1,9 +1,12 @@
 import streamlit as st
 
+from components.process_form import show_new_process_form
+from components.process_card import show_process_card
+
 from services.selection_process_service import (
     create_process,
     list_selection_processes,
-    delete_process
+    delete_process,
 )
 
 st.set_page_config(
@@ -11,56 +14,12 @@ st.set_page_config(
     layout="wide"
 )
 
-
-# ==========================
-# FORMULÁRIO DE CADASTRO
-# ==========================
-if "editing_process" not in st.session_state:
-    st.session_state.editing_process = None
-
 st.title("📋 Jornada New Job")
 
-st.header("Nova candidatura")
+if "delete_process_id" not in st.session_state:
+    st.session_state.delete_process_id = None
 
-with st.form("new_process"):
-
-    company = st.text_input("Empresa")
-
-    title = st.text_input("Cargo")
-
-    status = st.selectbox(
-        "Status",
-        [
-            "Candidatura enviada",
-            "Triagem",
-            "Entrevista RH",
-            "Entrevista Técnica",
-            "Teste",
-            "Proposta",
-            "Aprovado",
-            "Reprovado"
-        ]
-    )
-
-    submitted = st.form_submit_button("Salvar")
-
-    if submitted:
-
-        try:
-
-            create_process(
-                company,
-                title,
-                status
-            )
-
-            st.success("Processo cadastrado com sucesso!")
-
-            st.rerun()
-
-        except ValueError as error:
-
-            st.error(str(error))
+show_new_process_form(create_process)
 
 st.divider()
 
@@ -73,33 +32,42 @@ st.metric(
 
 st.divider()
 
-# ==========================
-# LISTAGEM
-# ==========================
-
 for process in processes:
 
-    col1, col2 = st.columns([5, 1])
+    action = show_process_card(process)
+
+    if action == "delete":
+
+        st.session_state.delete_process_id = process.id
+
+        st.rerun()
+
+if st.session_state.delete_process_id is not None:
+
+    st.divider()
+
+    st.warning("⚠️ Deseja realmente excluir este processo?")
+
+    col1, col2 = st.columns(2)
 
     with col1:
 
-        st.subheader(process.company)
+        if st.button("Sim, excluir"):
 
-        st.write(f"**Cargo:** {process.title}")
+            delete_process(
+                st.session_state.delete_process_id
+            )
 
-        st.write(f"**Status:** {process.current_status}")
+            st.session_state.delete_process_id = None
 
-    with col2:
-
-        if st.button(
-            "🗑️ Excluir",
-            key=f"delete_{process.id}"
-        ):
-
-            delete_process(process.id)
-
-            st.success("Processo excluído!")
+            st.success("Processo excluído.")
 
             st.rerun()
 
-    st.divider()
+    with col2:
+
+        if st.button("Cancelar"):
+
+            st.session_state.delete_process_id = None
+
+            st.rerun()
