@@ -2,13 +2,21 @@ import streamlit as st
 
 from services.selection_process_service import (
     create_process,
-    list_selection_processes
+    list_selection_processes,
+    delete_process
 )
 
 st.set_page_config(
     page_title="Jornada New Job",
     layout="wide"
 )
+
+
+# ==========================
+# FORMULÁRIO DE CADASTRO
+# ==========================
+if "editing_process" not in st.session_state:
+    st.session_state.editing_process = None
 
 st.title("📋 Jornada New Job")
 
@@ -48,6 +56,8 @@ with st.form("new_process"):
 
             st.success("Processo cadastrado com sucesso!")
 
+            st.rerun()
+
         except ValueError as error:
 
             st.error(str(error))
@@ -63,12 +73,33 @@ st.metric(
 
 st.divider()
 
+# ==========================
+# LISTAGEM
+# ==========================
+
 for process in processes:
 
-    st.subheader(process.company)
+    col1, col2 = st.columns([5, 1])
 
-    st.write(f"Cargo: {process.title}")
+    with col1:
 
-    st.write(f"Status: {process.current_status}")
+        st.subheader(process.company)
+
+        st.write(f"**Cargo:** {process.title}")
+
+        st.write(f"**Status:** {process.current_status}")
+
+    with col2:
+
+        if st.button(
+            "🗑️ Excluir",
+            key=f"delete_{process.id}"
+        ):
+
+            delete_process(process.id)
+
+            st.success("Processo excluído!")
+
+            st.rerun()
 
     st.divider()
