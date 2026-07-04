@@ -155,13 +155,15 @@ SQLite
 
 ---
 
-## Sprint 2
+Sprint 2
 
 ✔ Componentização
 
 ✔ Exclusão
 
-🟡 Edição
+✔ Edição
+
+Sprint concluída.
 
 ---
 
@@ -271,13 +273,11 @@ main
 
 ---
 
-# Próxima Feature
+Sprint Atual
 
-Feature 002
+Sprint 3
 
-Editar Processo
-
----
+Integração Gmail
 
 # Tech Lead
 

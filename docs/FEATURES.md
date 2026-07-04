@@ -6,27 +6,23 @@
 
 Status
 
-✔ Concluído
+✅ Concluído
 
 ---
-
-## Sprint 1
 
 ### Cadastro
 
 Status
 
-✔ Concluído
+✅ Concluído
 
 ---
-
-## Sprint 1
 
 ### Listagem
 
 Status
 
-✔ Concluído
+✅ Concluído
 
 ---
 
@@ -36,21 +32,17 @@ Status
 
 Status
 
-✔ Concluído
+✅ Concluído
 
 ---
-
-## Sprint 2
 
 ### Componentização
 
 Status
 
-✔ Concluído
+✅ Concluído
 
 ---
-
-## Sprint 2
 
 ### Feature 002
 
@@ -58,23 +50,23 @@ Editar Processo
 
 Status
 
-🟡 Em desenvolvimento
+✅ Concluído
 
 ---
 
 ## Sprint 3
 
-Integração Gmail
+### Integração Gmail
 
 Status
 
-🔲 Planejado
+🟡 Próxima Sprint
 
 ---
 
 ## Sprint 4
 
-Dashboard
+Dashboard Analítico
 
 Status
 
@@ -84,7 +76,7 @@ Status
 
 ## Sprint 5
 
-IA
+Inteligência Artificial
 
 Status
 

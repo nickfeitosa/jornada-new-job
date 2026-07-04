@@ -15,18 +15,21 @@
 
 ---
 
-# Sprint 2
+Sprint 2
 
-## CRUD
+CRUD
 
-- Cadastro ✔
+Cadastro ✔
 
-- Listagem ✔
+Listagem ✔
 
-- Exclusão ✔
+Exclusão ✔
 
-- Edição 🟡
+Edição ✔
 
+Status
+
+Sprint concluída.
 ---
 
 # Sprint 3

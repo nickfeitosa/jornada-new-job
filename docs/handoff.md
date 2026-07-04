@@ -12,15 +12,15 @@ Versão
 
 Projeto funcionando.
 
+CRUD finalizado.
+
 Arquitetura consolidada.
 
-CRUD praticamente finalizado.
+Documentação consolidada.
 
-Próxima implementação:
+Próxima Sprint:
 
-Feature 002.
-
-Editar Processo.
+Integração Gmail.
 
 ---
 
@@ -62,41 +62,37 @@ SQLite
 
 ---
 
-# Funcionalidades prontas
+# Funcionalidades
 
-✔ Cadastro
+✅ Cadastro
 
-✔ Listagem
+✅ Listagem
 
-✔ Exclusão
+✅ Exclusão
 
-✔ Componentização
+✅ Edição
 
-✔ Session State
-
----
-
-# Em andamento
-
-Feature 002
-
-Editar Processo
+✅ Componentização
 
 ---
 
-# Próximas Sprints
+# Sprint Finalizada
+
+Sprint 2
+
+CRUD completo.
+
+---
+
+# Próxima Sprint
 
 Sprint 3
 
 Integração Gmail
 
-Sprint 4
+Objetivo
 
-Dashboard Analítico
-
-Sprint 5
-
-IA
+Sincronizar automaticamente processos seletivos através da leitura de e-mails.
 
 ---
 
@@ -120,23 +116,15 @@ docs/
 
 # Metodologia
 
-Uma Feature
+Feature
 
 ↓
 
-Arquivos completos
+Código
 
 ↓
 
-Copiar
-
-↓
-
-Executar
-
-↓
-
-Testar
+Teste
 
 ↓
 
@@ -148,7 +136,15 @@ Push
 
 ↓
 
-Atualizar documentação
+Atualização da documentação
+
+↓
+
+Registro no backlog
+
+↓
+
+Próxima Feature
 
 ---
 
@@ -156,16 +152,16 @@ Atualizar documentação
 
 Atuar como Tech Lead.
 
-Sempre entregar funcionalidades completas.
+Entregar Features completas.
+
+Manter documentação sincronizada.
 
 Nunca enviar código parcial.
-
-Nunca modificar metodologia.
 
 ---
 
 # Objetivo Permanente
 
-Chegar o mais rápido possível na sincronização automática do Gmail.
+Chegar à sincronização automática do Gmail.
 
-Toda decisão deve considerar esse objetivo.
+Esse passa a ser o foco absoluto do projeto.

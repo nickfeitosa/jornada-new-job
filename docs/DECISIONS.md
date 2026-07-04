@@ -79,3 +79,19 @@ O GitHub é a fonte oficial do projeto.
 Repositório
 
 https://github.com/nickfeitosa/jornada-new-job
+---
+
+## DEC-008
+
+Toda Feature somente será considerada concluída após:
+
+- Código implementado
+- Testes executados
+- Commit realizado
+- Push realizado
+- Documentação atualizada
+- Backlog atualizado (quando aplicável)
+
+Motivo
+
+Garantir rastreabilidade completa da evolução do projeto.
