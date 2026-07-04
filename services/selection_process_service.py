@@ -9,13 +9,12 @@ from repositories.selection_process_repository import (
 )
 
 
-def create_process(
+def validate_process(
     company: str,
     title: str,
-    current_status: str
 ):
     """
-    Cria um novo processo seletivo.
+    Valida os dados do processo seletivo.
     """
 
     if not company.strip():
@@ -24,10 +23,25 @@ def create_process(
     if not title.strip():
         raise ValueError("Cargo é obrigatório.")
 
+
+def create_process(
+    company: str,
+    title: str,
+    current_status: str,
+):
+    """
+    Cria um novo processo seletivo.
+    """
+
+    validate_process(
+        company,
+        title,
+    )
+
     process = SelectionProcess(
         company=company.strip(),
         title=title.strip(),
-        current_status=current_status
+        current_status=current_status,
     )
 
     return create_selection_process(process)
@@ -53,23 +67,22 @@ def update_process(
     process_id: int,
     company: str,
     title: str,
-    current_status: str
+    current_status: str,
 ):
     """
     Atualiza um processo existente.
     """
 
-    if not company.strip():
-        raise ValueError("Empresa é obrigatória.")
-
-    if not title.strip():
-        raise ValueError("Cargo é obrigatório.")
+    validate_process(
+        company,
+        title,
+    )
 
     process = SelectionProcess(
         id=process_id,
         company=company.strip(),
         title=title.strip(),
-        current_status=current_status
+        current_status=current_status,
     )
 
     return update_selection_process(process)
@@ -77,7 +90,7 @@ def update_process(
 
 def delete_process(process_id: int):
     """
-    Exclui um processo.
+    Remove um processo seletivo.
     """
 
     return delete_selection_process(process_id)

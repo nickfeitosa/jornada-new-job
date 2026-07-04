@@ -4,7 +4,7 @@ from database.models import SelectionProcess
 
 def create_selection_process(process: SelectionProcess):
     """
-    Salva um processo seletivo no banco.
+    Salva um novo processo seletivo.
     """
 
     with SessionLocal() as session:
@@ -12,18 +12,19 @@ def create_selection_process(process: SelectionProcess):
         session.commit()
         session.refresh(process)
 
-    return process
+        return process
 
 
 def list_selection_processes():
     """
-    Retorna todos os processos cadastrados.
+    Lista todos os processos cadastrados.
     """
 
     with SessionLocal() as session:
+
         return (
             session.query(SelectionProcess)
-            .order_by(SelectionProcess.id)
+            .order_by(SelectionProcess.id.desc())
             .all()
         )
 
@@ -34,9 +35,12 @@ def get_selection_process_by_id(process_id: int):
     """
 
     with SessionLocal() as session:
+
         return (
             session.query(SelectionProcess)
-            .filter(SelectionProcess.id == process_id)
+            .filter(
+                SelectionProcess.id == process_id
+            )
             .first()
         )
 

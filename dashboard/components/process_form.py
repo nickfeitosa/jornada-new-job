@@ -8,42 +8,119 @@ STATUS_OPTIONS = [
     "Teste",
     "Proposta",
     "Aprovado",
-    "Reprovado"
+    "Reprovado",
 ]
 
 
-def show_new_process_form(create_process):
+def show_process_form(
+    create_process,
+    update_process,
+    process=None,
+):
+    """
+    Formulário reutilizável para:
 
-    st.header("➕ Nova candidatura")
+    - Novo Processo
+    - Editar Processo
+    """
 
-    with st.form("new_process"):
+    editing = process is not None
 
-        company = st.text_input("Empresa")
+    st.header(
+        "✏️ Editar Processo"
+        if editing
+        else "➕ Nova candidatura"
+    )
 
-        title = st.text_input("Cargo")
+    company = process.company if editing else ""
+
+    title = process.title if editing else ""
+
+    status = (
+        process.current_status
+        if editing
+        else STATUS_OPTIONS[0]
+    )
+
+    with st.form(
+        "edit_process"
+        if editing
+        else "new_process"
+    ):
+
+        company = st.text_input(
+            "Empresa",
+            value=company,
+        )
+
+        title = st.text_input(
+            "Cargo",
+            value=title,
+        )
 
         status = st.selectbox(
             "Status",
-            STATUS_OPTIONS
+            STATUS_OPTIONS,
+            index=STATUS_OPTIONS.index(status)
+            if status in STATUS_OPTIONS
+            else 0,
         )
 
-        submitted = st.form_submit_button(
-            "Salvar"
-        )
+        col1, col2 = st.columns(2)
+
+        with col1:
+
+            submitted = st.form_submit_button(
+                "💾 Salvar"
+            )
+
+        if editing:
+
+            with col2:
+
+                cancel = st.form_submit_button(
+                    "Cancelar"
+                )
+
+        else:
+
+            cancel = False
+
+        if cancel:
+
+            st.session_state.edit_process_id = None
+            st.rerun()
 
         if submitted:
 
             try:
 
-                create_process(
-                    company,
-                    title,
-                    status
-                )
+                if editing:
 
-                st.success(
-                    "Processo cadastrado com sucesso!"
-                )
+                    update_process(
+                        process.id,
+                        company,
+                        title,
+                        status,
+                    )
+
+                    st.success(
+                        "Processo atualizado com sucesso!"
+                    )
+
+                    st.session_state.edit_process_id = None
+
+                else:
+
+                    create_process(
+                        company,
+                        title,
+                        status,
+                    )
+
+                    st.success(
+                        "Processo cadastrado com sucesso!"
+                    )
 
                 st.rerun()
 
